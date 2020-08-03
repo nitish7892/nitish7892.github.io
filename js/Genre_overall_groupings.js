@@ -19,6 +19,7 @@ var svg = d3.select("#genreover")
 
 
 
+
 // Parse the Data
 d3.csv("https://raw.githubusercontent.com/nitish7892/nitish7892.github.io/master/data/Genre_Overall.csv", function(data) {
 
@@ -40,6 +41,40 @@ svg.append("g")
     .attr("x", width  - 500)
     .attr("y", height + 50)
     .text("Genre");
+
+    svg
+    .append("line")
+      .attr("x1", 50)
+      .attr("x2", 50 )
+      .attr("y1", 0)
+      .attr("y2", 200)
+      .attr("stroke", "grey")
+      .attr("stroke-dasharray", "4");
+
+
+
+    svg
+    .append("line")
+      .attr("x1", 0)
+      .attr("x2", 1000 )
+      .attr("y1", 220)
+      .attr("y2", 220)
+      .attr("stroke", "grey")
+      .attr("stroke-dasharray", "4");
+
+svg.append("text")
+                    .attr("x", 800)             
+                    .attr("y", 220)
+                    .attr("text-anchor", "left")  
+                    .style("font-size", "15px")
+                    .text("Median Sales"); 
+
+svg.append("text")
+                    .attr("x", 60)             
+                    .attr("y", 15)
+                    .attr("text-anchor", "left")  
+                    .style("font-size", "15px")
+                    .text("Top Genre"); 
 
 // Add Y axis
 var y = d3.scaleLinear()

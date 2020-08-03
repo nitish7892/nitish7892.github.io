@@ -65,10 +65,37 @@ genre_groupings <- data %>% group_by(Year,Platform) %>% summarise(n())
 genre_groupings <- genre_groupings[!is.na(genre_groupings$Year),]
 
 genre_groupings <- genre_groupings[genre_groupings$Year != "N/A",]
-colnames(genre_groupings) <- c("Release Year",
+colnames(genre_groupings) <- c("Release_Year",
                                "Platform",
                                "Count")
 
-write.csv(genre_groupings,"ReleaseYear_Platform_count",row.names = F)
+write.csv(genre_groupings,"Release_Year_Platform_count",row.names = F)
+
+
+
+genre_groupings <- data %>% group_by(Year,Publisher) %>% summarise(n())
+
+genre_groupings <- genre_groupings[!is.na(genre_groupings$Year),]
+
+genre_groupings <- genre_groupings[genre_groupings$Year != "N/A",]
+colnames(genre_groupings) <- c("Release_Year",
+                               "Publisher",
+                               "Count")
+
+write.csv(genre_groupings,"Release_Year_Publisher_count",row.names = F)
+
+
+
+
+genre_groupings <- data %>% group_by(Year,Genre) %>% summarise(n())
+
+genre_groupings <- genre_groupings[!is.na(genre_groupings$Year),]
+
+genre_groupings <- genre_groupings[genre_groupings$Year != "N/A",]
+colnames(genre_groupings) <- c("Release_Year",
+                               "Genre",
+                               "Count")
+
+write.csv(genre_groupings,"Release_Year_Genre_count",row.names = F)
 
 
