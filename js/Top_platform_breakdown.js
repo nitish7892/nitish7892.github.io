@@ -86,6 +86,32 @@ svg.append("text")
                     .style("font-size", "15px")
                     .text("Top Platform"); 
 
+
+
+        svg
+    .append("line")
+      .attr("x1", 200)
+      .attr("x2", 500 )
+      .attr("y1", 150)
+      .attr("y2", 20)
+      .attr("stroke", "grey")
+      .attr("stroke-dasharray", "4");
+
+      svg.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("y", -40)
+    .attr("x", -150)
+    .attr("transform", "rotate(-90)")
+    .text("Sales");
+
+      svg.append("text")
+                    .attr("x", 400)             
+                    .attr("y", 20)
+                    .attr("text-anchor", "left")  
+                    .style("font-size", "15px")
+                    .text("Very small Japan XBox360 Sales"); 
+
   // color palette = one color per subgroup
   var color = d3.scaleOrdinal()
     .domain(subgroups)

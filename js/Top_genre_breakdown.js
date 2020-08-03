@@ -67,6 +67,22 @@ d3.csv("https://raw.githubusercontent.com/nitish7892/nitish7892.github.io/master
       .attr("stroke", "grey")
       .attr("stroke-dasharray", "4");
 
+          svg
+    .append("line")
+      .attr("x1", 300)
+      .attr("x2", 600 )
+      .attr("y1", 220)
+      .attr("y2", 10)
+      .attr("stroke", "grey")
+      .attr("stroke-dasharray", "4");
+
+      svg.append("text")
+                    .attr("x", 600)             
+                    .attr("y", 20)
+                    .attr("text-anchor", "left")  
+                    .style("font-size", "15px")
+                    .text("Japan Dominating RPG Games"); 
+
 
 
     svg

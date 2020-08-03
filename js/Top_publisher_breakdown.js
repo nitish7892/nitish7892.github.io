@@ -44,6 +44,22 @@ d3.csv("https://raw.githubusercontent.com/nitish7892/nitish7892.github.io/master
     .text("Publisher");
 
 
+        svg
+    .append("line")
+      .attr("x1", 50)
+      .attr("x2", 500 )
+      .attr("y1", 150)
+      .attr("y2", 20)
+      .attr("stroke", "grey")
+      .attr("stroke-dasharray", "4");
+
+      svg.append("text")
+                    .attr("x", 400)             
+                    .attr("y", 20)
+                    .attr("text-anchor", "left")  
+                    .style("font-size", "15px")
+                    .text("Nintendo Domimating Publishers"); 
+
 
 
 
