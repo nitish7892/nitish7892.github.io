@@ -1,4 +1,4 @@
-function Line_1(){
+function Line_3(){
 
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 100, bottom: 90, left: 60},
@@ -6,7 +6,7 @@ var margin = {top: 10, right: 100, bottom: 90, left: 60},
     height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#line_1")
+var svg = d3.select("#line_3")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -15,13 +15,13 @@ var svg = d3.select("#line_1")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-d3.csv("https://raw.githubusercontent.com/nitish7892/nitish7892.github.io/master/data/Release_Year_Platform_count", function(data) {
+d3.csv("https://raw.githubusercontent.com/nitish7892/nitish7892.github.io/master/data/Release_Year_Genre_count", function(data) {
 
     // List of groups (here I have one group per column)
-    var allGroup = d3.map(data, function(d){return(d.Platform)}).keys()
+    var allGroup = d3.map(data, function(d){return(d.Genre)}).keys()
 
     // add the options to the button
-    d3.select("#selectButton")
+    d3.select("#selectButton_3")
       .selectAll('myOptions')
      	.data(allGroup)
       .enter()
@@ -69,7 +69,7 @@ d3.csv("https://raw.githubusercontent.com/nitish7892/nitish7892.github.io/master
     var line = svg
       .append('g')
       .append("path")
-        .datum(data.filter(function(d){return d.Platform==allGroup[0]}))
+        .datum(data.filter(function(d){return d.Genre==allGroup[0]}))
         .attr("d", d3.line()
           .x(function(d) { return x(d.Release_Year) })
           .y(function(d) { return y(+d.Count) })
@@ -82,7 +82,7 @@ d3.csv("https://raw.githubusercontent.com/nitish7892/nitish7892.github.io/master
     function update(selectedGroup) {
 
       // Create new data with the selection?
-      var dataFilter = data.filter(function(d){return d.Platform==selectedGroup})
+      var dataFilter = data.filter(function(d){return d.Genre==selectedGroup})
 
       // Give these new data to update line
       line
@@ -97,7 +97,7 @@ d3.csv("https://raw.githubusercontent.com/nitish7892/nitish7892.github.io/master
     }
 
     // When the button is changed, run the updateChart function
-    d3.select("#selectButton").on("change", function(d) {
+    d3.select("#selectButton_3").on("change", function(d) {
         // recover the option that has been chosen
         var selectedOption = d3.select(this).property("value")
         // run the updateChart function with this selected option
@@ -108,5 +108,4 @@ d3.csv("https://raw.githubusercontent.com/nitish7892/nitish7892.github.io/master
 
 
 }
-
-Line_1();
+Line_3();

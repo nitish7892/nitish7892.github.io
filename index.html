@@ -35,8 +35,7 @@
             <ul>
                 <li>Overall Sales by Genre</li>
                 <li>Breakdown of Sales by Region for different Genres/Platforms and Publishers</li>
-                <li>Breakdown of Sales by Region for different Platforms</li>
-                <li>Breakdown of Sales by Region for different Publishers</li>
+                <li>Breakdown of change in video game releases over time for different Genres/Platforms and Publishers</li>
             </ul>
         </div>
         <div class="row">
@@ -91,24 +90,48 @@
         </div>
         <div class="container">
         <div class="row">
-            <h4 style="ffont-weight: bold; font-family: Montserrat; color:red;" >Extra analysis</h4>
+            <h4 style="ffont-weight: bold; font-family: Montserrat; color:red;" >Breakdown of change in video game releases over time for different Genres/Platforms and Publishers</h4>
         </div>
         <div class="row">
-            <p>The third
-            </p>
-            <p>It 
+            <p>The third scene is below and it has 3 separate line charts with a drop down option for filtering as well. 
             </p>
         </div>
     </div>
 
         <!-- Initialize a select button -->
-        <select id="selectButton"></select>
+        <select id="selectButton" ></select>
 
          <div class="container">
         <div class="row">
+          <p> This line chart shows how the count of video games has changed over time depending on the platform of console. There is a drop down for selecting the platform as well that we can use to filter out and see specific results.
+          </p>
             <div id="line_1">
             </div>  
         </div>
+
+
+         <!-- Initialize a select button -->
+        <select id="selectButton_2" ></select>
+
+         <div class="container">
+        <div class="row">
+                    <p> This line chart shows how the count of video games has changed over time depending on the publisher of the game. There is a drop down for selecting the publisher as well that we can use to filter out and see specific results.
+          </p>
+            <div id="line_2">
+            </div>  
+        </div>
+
+         <!-- Initialize a select button -->
+        <select id="selectButton_3" ></select>
+
+         <div class="container">
+        <div class="row">
+                    <p> This line chart shows how the count of video games has changed over time depending on the genre of games. There is a drop down for selecting the genre as well that we can use to filter out and see specific results.
+          </p>
+            <div id="line_3">
+            </div>  
+        </div>
+
 
     
 
@@ -131,9 +154,14 @@
 <script src="js/Top_platform_breakdown.js"></script>
 <script src="js/Top_publisher_breakdown.js"></script>
 <script src="js/Line_1.js"></script>
+<script src="js/Line_2.js"></script>
+<script src="js/Line_3.js"></script>
+
+
 
 <!-- Color Scale -->
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
 <!-- Load d3-annotation -->
 <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
 

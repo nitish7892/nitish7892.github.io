@@ -1,7 +1,7 @@
 function Top_pub_breakdown(){
 
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 100, bottom: 90, left: 60},
+var margin = {top: 10, right: 100, bottom: 150, left: 60},
     width = 1200 - margin.left - margin.right,
     height = 450 - margin.top - margin.bottom;
 
@@ -40,7 +40,7 @@ d3.csv("https://raw.githubusercontent.com/nitish7892/nitish7892.github.io/master
     .attr("class", "x label")
     .attr("text-anchor", "end")
     .attr("x", width  - 500)
-    .attr("y", height + 90)
+    .attr("y", height + 120)
     .text("Publisher");
 
   // Add Y axis
