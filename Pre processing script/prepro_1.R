@@ -10,7 +10,7 @@ colnames(genre_groupings) <- c("Genre","NA_Sales",
                                "Total")
 genre_groupings <- genre_groupings[order(-genre_groupings$Total),]
 
-genre_groupings <- genre_groupings[-6]
+genre_groupings <- genre_groupings[1:10,-6]
 
 write.csv(genre_groupings,"Genre_Overallgroupings.csv",row.names = F)
 
@@ -27,7 +27,7 @@ genre_groupings <- genre_groupings[order(-genre_groupings$Total),]
 genre_groupings <- genre_groupings[1:10,-6]
 
 
-write.csv(genre_groupings,"Publisher_Overallgroupings_top10.csv",row.names = F)
+write.csv(genre_groupings,"Publisher_Overallgroupings_top5.csv",row.names = F)
 
 
 
@@ -43,7 +43,7 @@ genre_groupings <- genre_groupings[order(-genre_groupings$Total),]
 genre_groupings <- genre_groupings[1:10,-6]
 
 
-write.csv(genre_groupings,"Platform_Overallgroupings_top10.csv",row.names = F)
+write.csv(genre_groupings,"Platform_Overallgroupings_top5.csv",row.names = F)
 
 
 
