@@ -1,23 +1,12 @@
-<!-- Code from d3-graph-gallery.com -->
-<!DOCTYPE html>
-<meta charset="utf-8">
-
-<!-- Load d3.js -->
-<script src="https://d3js.org/d3.v4.js"></script>
-
-<!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
-
-
-<script>
+function Top_pub_breakdown(){
 
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 90, left: 40},
-    width = 460 - margin.left - margin.right,
+var margin = {top: 10, right: 100, bottom: 90, left: 60},
+    width = 1200 - margin.left - margin.right,
     height = 450 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
+var svg = d3.select("#pubbreakdown")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -26,13 +15,13 @@ var svg = d3.select("#my_dataviz")
           "translate(" + margin.left + "," + margin.top + ")");
 
 // Parse the Data
-d3.csv("https://raw.githubusercontent.com/nitish7892/nitish7892.github.io/master/data/Genre_Overallgroupings.csv", function(data) {
+d3.csv("https://raw.githubusercontent.com/nitish7892/nitish7892.github.io/master/data/Publisher_Overallgroupings_top10.csv", function(data) {
 
   // List of subgroups = header of the csv files = soil condition here
   var subgroups = data.columns.slice(1)
 
   // List of groups = species here = value of the first column called group -> I show them on the X axis
-  var groups = d3.map(data, function(d){return(d.Genre)}).keys()
+  var groups = d3.map(data, function(d){return(d.Publisher)}).keys()
 
   // Add X axis
   var x = d3.scaleBand()
@@ -41,10 +30,18 @@ d3.csv("https://raw.githubusercontent.com/nitish7892/nitish7892.github.io/master
       .padding([0.2])
   svg.append("g")
     .attr("transform", "translate(0," + height + ")")
-          .call(d3.axisBottom(x))
+      .call(d3.axisBottom(x))
   .selectAll("text")
     .attr("transform", "translate(-10,0)rotate(-45)")
     .style("text-anchor", "end");
+
+
+     svg.append("text")
+    .attr("class", "x label")
+    .attr("text-anchor", "end")
+    .attr("x", width  - 500)
+    .attr("y", height + 90)
+    .text("Publisher");
 
   // Add Y axis
   var y = d3.scaleLinear()
@@ -52,6 +49,15 @@ d3.csv("https://raw.githubusercontent.com/nitish7892/nitish7892.github.io/master
     .range([ height, 0 ]);
   svg.append("g")
     .call(d3.axisLeft(y));
+
+      // Y label Frequency 
+  svg.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("y", -40)
+    .attr("x", -150)
+    .attr("transform", "rotate(-90)")
+    .text("Sales");
 
   // color palette = one color per subgroup
   var color = d3.scaleOrdinal()
@@ -69,7 +75,7 @@ d3.csv("https://raw.githubusercontent.com/nitish7892/nitish7892.github.io/master
   // ----------------
   // Create a tooltip
   // ----------------
-  var tooltip = d3.select("#my_dataviz")
+  var tooltip = d3.select("#pubbreakdown")
     .append("div")
     .style("opacity", 0)
     .attr("class", "tooltip")
@@ -89,8 +95,8 @@ d3.csv("https://raw.githubusercontent.com/nitish7892/nitish7892.github.io/master
   }
   var mousemove = function(d) {
     tooltip
-      .style("left", (d3.mouse(this)[0]+90) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
-      .style("top", (d3.mouse(this)[1]) + "px")
+      .style("left", (d3.event.pageX + 10)+ "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+      .style("top", (d3.event.pageY - 15) + "px")
   }
   var mouseleave = function(d) {
     tooltip
@@ -111,7 +117,7 @@ d3.csv("https://raw.githubusercontent.com/nitish7892/nitish7892.github.io/master
       // enter a second time = loop subgroup per subgroup to add all rectangles
       .data(function(d) { return d; })
       .enter().append("rect")
-        .attr("x", function(d) { return x(d.data.Genre); })
+        .attr("x", function(d) { return x(d.data.Publisher); })
         .attr("y", function(d) { return y(d[1]); })
         .attr("height", function(d) { return y(d[0]) - y(d[1]); })
         .attr("width",x.bandwidth())
@@ -122,4 +128,6 @@ d3.csv("https://raw.githubusercontent.com/nitish7892/nitish7892.github.io/master
 
 })
 
-</script>
+}
+
+Top_pub_breakdown();

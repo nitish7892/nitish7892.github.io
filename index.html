@@ -1,73 +1,118 @@
-<!-- Code from d3-graph-gallery.com -->
-<!DOCTYPE html>
-<meta charset="utf-8">
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- page title  -->
+    <title>Video Game analysis - nsingla2</title>
+    <!-- Bootstrap copied from https://getbootstrap.com/docs/4.4/getting-started/introduction/-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Custom logo styling -->
+    <link rel="stylesheet" href="css/logo.css">
+    <!-- Custom Tooltip CSS styling-->
+    <link rel="stylesheet" href="css/d3-tip.css">
+</head>
 
-<!-- Load d3.js -->
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <a class="navbar-brand" href="index.html" ><img id="logo" src="img/illinois.png"></a>      
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <h4 style="font-weight: bold; font-family: Montserrat; color:red;" >Introduction</h4>
+        </div>
+        <div class="row">
+            <p>
+                In this assignment, I am analyzing the data for video game sales from a kaggle dataset.
+            </p>
+            <p>
+                The analysis is focussed on the following few sub categories. </br>
+            </p>
+        </div>
+        <div class="row">
+            <ul>
+                <li>Overall Sales by Genre</li>
+                <li>Breakdown of Sales by Region for different Genres/Platforms and Publishers</li>
+                <li>Breakdown of Sales by Region for different Platforms</li>
+                <li>Breakdown of Sales by Region for different Publishers</li>
+            </ul>
+        </div>
+        <div class="row">
+            <p>
+                <small>
+                    The data repository is from kaggle. <a href="https://www.kaggle.com/gregorut/videogamesales">here.</a>
+                </small>
+            </p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <h4 style="font-weight: bold; font-family: Montserrat; color:red;" >Overall Sales by Genre</h4>
+        </div>
+        <div class="row">
+            <p>The first scene gives us a high level view of Sales of Video Games by different Genres.
+            </p>
+            <p>It is presented by animation by loading in an interactive bar chart.
+            </p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div id="genreover">
+            </div>  
+        </div>
+<div class="container">
+        <div class="row">
+            <h4 style="ffont-weight: bold; font-family: Montserrat; color:red;" >Breakdown of Sales by Region for different Genres/Platforms and Publishers</h4>
+        </div>
+        <div class="row">
+            <p>The second scene gives us a breakdown level view of Sales of Video Games by different Genres/Platforms and Publishers
+            </p>
+            <p>It is presented with a tooltip and with staked bar charts
+            </p>
+        </div>
+    </div>
+     <div class="container">
+        <div class="row">
+            <div id="genbreakdown">
+            </div>  
+        </div>
+        <div class="container">
+        <div class="row">
+            <div id="platbreakdown">
+            </div>  
+        </div>
+        <div class="container">
+        <div class="row">
+            <div id="pubbreakdown">
+            </div>  
+        </div>
+
+    
+
+<!-- Src files/ -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- d3 v5 library -->
+<script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="https://d3js.org/d3.v4.js"></script>
 
-<!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
+<!-- JS For multiple scenes of visualizations-->
+<script src="js/Genre_overall_groupings.js"></script>
+<script src="js/Top_genre_breakdown.js"></script>
+<script src="js/Top_platform_breakdown.js"></script>
+<script src="js/Top_publisher_breakdown.js"></script>
+<!-- Load d3-annotation -->
+<script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
 
 
-<script>
-
-
-// set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 90, left: 40},
-    width = 460 - margin.left - margin.right,
-    height = 450 - margin.top - margin.bottom;
-
-// append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
-
-// Parse the Data
-d3.csv("https://raw.githubusercontent.com/nitish7892/nitish7892.github.io/master/data/Genre_globalsales.csv", function(data) {
-
-// X axis
-var x = d3.scaleBand()
-  .range([ 0, width ])
-  .domain(data.map(function(d) { return d.Genre; }))
-  .padding(0.2);
-svg.append("g")
-  .attr("transform", "translate(0," + height + ")")
-  .call(d3.axisBottom(x))
-  .selectAll("text")
-    .attr("transform", "translate(-10,0)rotate(-45)")
-    .style("text-anchor", "end");
-
-// Add Y axis
-var y = d3.scaleLinear()
-  .domain([0, 4000])
-  .range([ height, 0]);
-svg.append("g")
-  .call(d3.axisLeft(y));
-
-// Bars
-svg.selectAll("mybar")
-  .data(data)
-  .enter()
-  .append("rect")
-    .attr("x", function(d) { return x(d.Genre); })
-    .attr("width", x.bandwidth())
-    .attr("fill", "#69b3a2")
-    // no bar at the beginning thus:
-    .attr("height", function(d) { return height - y(0); }) // always equal to 0
-    .attr("y", function(d) { return y(0); })
-
-// Animation
-svg.selectAll("rect")
-  .transition()
-  .duration(800)
-  .attr("y", function(d) { return y(d.GlobalSales); })
-  .attr("height", function(d) { return height - y(d.GlobalSales); })
-  .delay(function(d,i){console.log(i) ; return(i*100)})
-
-})
-
-</script>
+</body>
+</html>

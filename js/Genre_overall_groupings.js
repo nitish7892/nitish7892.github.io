@@ -1,24 +1,15 @@
-<!-- Code from d3-graph-gallery.com -->
-<!DOCTYPE html>
-<meta charset="utf-8">
-
-<!-- Load d3.js -->
-<script src="https://d3js.org/d3.v4.js"></script>
-
-<!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
-
-
-<script>
-
+function Genre_overall(){
 
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 90, left: 40},
-    width = 460 - margin.left - margin.right,
+var margin = {top: 10, right: 100, bottom: 90, left: 60},
+    width = 1200 - margin.left - margin.right,
     height = 450 - margin.top - margin.bottom;
 
+
+
+
 // append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
+var svg = d3.select("#genreover")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -26,8 +17,10 @@ var svg = d3.select("#my_dataviz")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
+
+
 // Parse the Data
-d3.csv("https://raw.githubusercontent.com/nitish7892/nitish7892.github.io/master/data/Genre_Over_group.csv", function(data) {
+d3.csv("https://raw.githubusercontent.com/nitish7892/nitish7892.github.io/master/data/Genre_Overall.csv", function(data) {
 
 // X axis
 var x = d3.scaleBand()
@@ -41,12 +34,28 @@ svg.append("g")
     .attr("transform", "translate(-10,0)rotate(-45)")
     .style("text-anchor", "end");
 
+     svg.append("text")
+    .attr("class", "x label")
+    .attr("text-anchor", "end")
+    .attr("x", width  - 500)
+    .attr("y", height + 50)
+    .text("Genre");
+
 // Add Y axis
 var y = d3.scaleLinear()
-  .domain([0, 4000])
+  .domain([0, 2000])
   .range([ height, 0]);
 svg.append("g")
   .call(d3.axisLeft(y));
+
+  // Y label Frequency 
+  svg.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("y", -40)
+    .attr("x", -150)
+    .attr("transform", "rotate(-90)")
+    .text("Sales");
 
 // Bars
 svg.selectAll("mybar")
@@ -60,14 +69,20 @@ svg.selectAll("mybar")
     .attr("height", function(d) { return height - y(0); }) // always equal to 0
     .attr("y", function(d) { return y(0); })
 
+
+
 // Animation
 svg.selectAll("rect")
   .transition()
   .duration(800)
-  .attr("y", function(d) { return y(d.GlobalSales); })
-  .attr("height", function(d) { return height - y(d.GlobalSales); })
+  .attr("y", function(d) { return y(d.Total); })
+  .attr("height", function(d) { return height - y(d.Total); })
   .delay(function(d,i){console.log(i) ; return(i*100)})
+
 
 })
 
-</script>
+
+}
+
+Genre_overall();
